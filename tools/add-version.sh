@@ -19,4 +19,5 @@ then
     curl -s -O "https://raw.githubusercontent.com/stakater/Reloader/${version}/deployments/kubernetes/reloader.yaml"
     cp ../../../../templates/base-release-template.yaml kustomization.yaml
     cd ../../../../
+    sed -i -r '/base\/v/s/v.*\.([^.]*)$/'${version}'/g' kustomize/overlays/proxmox/kustomization.yaml
 fi
