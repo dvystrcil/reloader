@@ -33,4 +33,6 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           branch: "updating-${{ github.event.inputs.version }}"
+          title: "Updating to ${{ github.event.inputs.version }}"
           commit-message: "Updating to ${{ github.event.inputs.version }}"
+          delete-branch: true
