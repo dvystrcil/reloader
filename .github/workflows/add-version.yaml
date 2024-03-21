@@ -1,0 +1,36 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Upgrade Version
+
+permissions:
+  contents: write
+  pull-requests: write
+
+# Controls when the workflow will run
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Target Version'
+        required: true
+        default: ''
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  update-vesion:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update Version
+        run: |
+          chmod +x ./tools/add-version.sh  
+          ./tools/add-version.sh  ${{ github.event.inputs.version }}
+          
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: "updating-${{ github.event.inputs.version }}"
+          commit-message: "Updating to ${{ github.event.inputs.version }}"
