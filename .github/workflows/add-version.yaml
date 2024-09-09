@@ -30,7 +30,7 @@ jobs:
           ./tools/add-version.sh  ${{ github.event.inputs.version }}
           
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v6
+        uses: peter-evans/create-pull-request@v7
         with:
           branch: "updating-${{ github.event.inputs.version }}"
           title: "Updating to ${{ github.event.inputs.version }}"
